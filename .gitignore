@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Distribution / packaging
+build/
+dist/
+
+# Unit test / coverage reports
+.tox/
+.pytest_cache/
+.mypy_cache/
+.coverage*
+
+# Sphinx documentation
+docs/_build/
+
+# pyenv
+.python-version

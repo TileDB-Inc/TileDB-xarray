@@ -4,6 +4,17 @@
 
 This library provides a TileDB backend engine for xarray `open_dataset` function.
 
+Example usage:
+
+```python
+import xarray as xr
+dataset = xr.open_dataset(
+    "tiledb_array_uri",
+    backend_kwargs={"key": key, "timestamp": timestamp},
+    engine="tiledb"
+    )
+```
+
 ## Quick Links
 
 * TileDB
