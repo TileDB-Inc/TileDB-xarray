@@ -30,7 +30,7 @@ A useful bug report filed as a GitHub issue provides information about how to re
 
 ### Quickstart Workflow
 
-[From a fork of TileDB](https://help.github.com/articles/fork-a-repo/)
+[From a fork of TileDB-xarray](https://help.github.com/articles/fork-a-repo/)
 
 ```bash
 git clone https://github.com/username/TileDB-xarray
@@ -42,7 +42,7 @@ git commit -a -m "descriptive commit message"
 git push --set-upstream origin <my_initials>/<my_bugfix_branch>
 ```
 
-[Issue a PR from your updated TileDB fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
+[Issue a PR from your updated TileDB-xarray fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
 
 Branch conventions:
 
@@ -54,9 +54,9 @@ Branch conventions:
 
 This project uses [poetry](https://python-poetry.org/) for its build system and package management.
 
-To install `tiledb.xarray` library, all required dependencies, and all development tools, run `poetry install`. To install only the `tiledb.xarray` library and required dependencies run `poetry install --no-dev`. Poetry will create a local virtual environment and install python packages to the local virtual environment. Once installed, the dependencies can be updated by running `poetry update`.
+To install `tiledb.xarray` library, all required dependencies, and all development tools, run `poetry install`. To install only the `tiledb.xarray` library and required dependencies run `poetry install --no-dev`. To add libraries needed for running with dask run `poetry install --extras dask`. Poetry will create a local virtual environment and install python packages to the local virtual environment. Once installed, the dependencies can be updated by running `poetry update`.
 
-To run software in the local environment poetry creates, you can run python or tools with poetry (e.g. `poetry run python`, `poetry run black`), by using the poetry shell (`poetry shell`), or by manually activating the virtual environment. Information about the virtual environment can be viewed with the `poetry env info` command.
+To run software in the local environment poetry creates, you can run python or python tools with poetry (e.g. `poetry run python`, `poetry run black`), by using the poetry shell (`poetry shell`), or by manually activating the virtual environment. Information about the virtual environment can be viewed with the `poetry env info` command.
 
 ### Formatting, Style, and Linting
 
@@ -64,7 +64,7 @@ To run software in the local environment poetry creates, you can run python or t
 * class names use `CamelCase`
 * member functions, variables use `snake_case`
 * private module or class member use a leading underscore `_local_variable`
-* comments are good, the project uses Google-stype docstrings with type hints
+* comments are good, the project uses Google-style docstrings with type hints
 * format code using [black](https://pypi.org/project/black/) and [isort](https://pypi.org/project/isort/)
 * lint code using [flake8](https://pypi.org/project/flake8/) and [mypy](https://pypi.org/project/mypy/)
 
@@ -81,7 +81,7 @@ git stash pop
 
 ### Testing
 
-The testing for this project uses pytest and tox. Currently, tox is set-up to test Python versions 3.7 and 3.8. This requires you to have `python3.7` and `python3.8` accessible to tox. Tests can be run through poetry in the local directory by running:
+The testing for this project uses pytest and tox. Currently, tox is set-up to test Python versions 3.7, 3.8, and 3.9. This requires you to have `python3.7`, `python3.8`, and `python3.9` accessible to tox. Tests can be run through poetry in the local directory by running:
 
 ```bash
 poetry run tox
