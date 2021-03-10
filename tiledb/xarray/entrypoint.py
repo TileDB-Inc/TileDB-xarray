@@ -436,5 +436,8 @@ class TileDBBackendEntrypoint(BackendEntrypoint):
             )
         return dataset
 
+    def guess_can_open(self, filename_or_obj):
+        return tiledb.object_type(filename_or_obj) == "array"
+
 
 BACKEND_ENTRYPOINTS["tiledb"] = TileDBBackendEntrypoint

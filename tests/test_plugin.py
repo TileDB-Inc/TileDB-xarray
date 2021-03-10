@@ -141,6 +141,11 @@ class TestTileDB:
         dataset = open_dataset(uri, engine="tiledb")
         assert_allclose(dataset, expected)
 
+    def test_open_multidim_dataset_guess_engine(self, create_tiledb_example):
+        uri, expected = create_tiledb_example
+        dataset = open_dataset(uri)
+        assert_allclose(dataset, expected)
+
     @pytest.mark.parametrize("simple_data_arrays", simple_examples_1d, indirect=True)
     def test_basic_indexing_1D(self, simple_data_arrays):
         (result, expected) = simple_data_arrays
