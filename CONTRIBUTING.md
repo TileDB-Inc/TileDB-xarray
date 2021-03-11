@@ -34,10 +34,11 @@ A useful bug report filed as a GitHub issue provides information about how to re
 
 ```bash
 git clone https://github.com/username/TileDB-xarray
-poetry install # creates virtual environment & installs TileDB-xarray
+pip install -e '.[parallel]'
 git checkout -b <my_initials>/<my_bugfix/feature_branch>
 # ... code changes ...
-poetry run tox # run all test suites with tox
+./tools/lint.sh # run linters
+tox # run all test suites with tox
 git commit -a -m "descriptive commit message"
 git push --set-upstream origin <my_initials>/<my_bugfix_branch>
 ```
@@ -52,11 +53,26 @@ Branch conventions:
 
 ### Building Locally for Development
 
-This project uses [poetry](https://python-poetry.org/) for its build system and package management.
+This project uses setuptools for its build system, and can be built locally using pip. It is recommended you set-up a Python virtual environment with your preferred method before installing. Once the virtual environment is activated, install `tiledb.xarray` as 'editable' using pip:
 
-To install `tiledb.xarray` library, all required dependencies, and all development tools, run `poetry install`. To install only the `tiledb.xarray` library and required dependencies run `poetry install --no-dev`. To add libraries needed for running with dask run `poetry install --extras dask`. Poetry will create a local virtual environment and install python packages to the local virtual environment. Once installed, the dependencies can be updated by running `poetry update`.
+```bash
+pip install -e .
+```
 
-To run software in the local environment poetry creates, you can run python or python tools with poetry (e.g. `poetry run python`, `poetry run black`), by using the poetry shell (`poetry shell`), or by manually activating the virtual environment. Information about the virtual environment can be viewed with the `poetry env info` command.
+To include dask for running xarray in parallel use the `parallel` extras:
+
+```bash
+pip install -e '.[parallel]'
+```
+
+The following tools are used for testing, linting, and formatting. You may want to install them either in the local virtual environment or as command line tools for you system:
+
+* black
+* flake8
+* mypy
+* pytest (with pytest-cov)
+* tox
+
 
 ### Formatting, Style, and Linting
 
@@ -68,9 +84,7 @@ To run software in the local environment poetry creates, you can run python or p
 * format code using [black](https://pypi.org/project/black/) and [isort](https://pypi.org/project/isort/)
 * lint code using [flake8](https://pypi.org/project/flake8/) and [mypy](https://pypi.org/project/mypy/)
 
-This project uses a variety of static analysis tools for improved code quality. These tools are included in the development dependencies in the [pyproject.toml](pyproject.toml) file and will be installed in a local virtual environment when running `poetry install` or `poetry update`.
-
-It is highly recommended to run formatting and linting tools before every commit. This can be automated by activating the pre-commit hook `tools/hooks/pre-commit.sh`. This can be done by either creating a symlink or copying `tools/hooks/pre-commit.sh` to `.git/hooks/pre-commit` in the local directory. Note that the pre-commit hook may fail due to unstaged changes. You may wish to stash these changes before committing. This can be done as follows:
+It is highly recommended to run formatting and linting tools before every commit. This can be automated by activating the pre-commit hook `tools/hooks/pre-commit.sh`. To do this symlink or copy `tools/hooks/pre-commit.sh` to `.git/hooks/pre-commit` in the local directory. Note that the pre-commit hook may fail due to unstaged changes. You may wish to stash these changes before committing. This can be done as follows:
 
 ```bash
 git add <files-to-be-added>
@@ -81,11 +95,7 @@ git stash pop
 
 ### Testing
 
-The testing for this project uses pytest and tox. Currently, tox is set-up to test Python versions 3.7, 3.8, and 3.9. This requires you to have `python3.7`, `python3.8`, and `python3.9` accessible to tox. Tests can be run through poetry in the local directory by running:
-
-```bash
-poetry run tox
-```
+The testing for this project uses pytest and tox. Currently, tox is set-up to test Python versions 3.7, 3.8, and 3.9. This requires you to have `python3.7`, `python3.8`, and `python3.9` accessible to tox. Tests can be run by executing `tox`.
 
 It is strongly recommended that you run the full tox test suite before submitting code for a pull request.
 
@@ -95,11 +105,11 @@ It is strongly recommended that you run the full tox test suite before submittin
 
 * Commit changes to a local branch.  The convention is to use your initials to identify branches.  Branch names should be identifiable and reflect the feature or bug that they want to address / fix. This helps in deleting old branches later.
 
-* Make sure the test suite passes by running `poetry run tox`.
+* Make sure the test suite passes by running `tox`.
 
 * When ready to submit a PR, `git rebase` the branch on top of the latest `dev` commit.  Be sure to squash / cleanup the commit history so that the PR preferably one, or a couple commits at most.  Each atomic commit in a PR should be able to pass the test suite.
 
-* Run the formatting (`poetry run isort`, `poetry run black`) and linting tools (`poetry run flake8`, `poetry run mypy`) before submitting a final PR. Make sure that your contribution generally follows the format and naming conventions used by surrounding code.
+* Run the formatting (`isort`, `black`) and linting tools (`flake8`, `mypy`) before submitting a final PR. Make sure that your contribution generally follows the format and naming conventions used by surrounding code.
 
 * Update the [HISTROY.md](HISTORY.md) with any changes/adds/removes to user-facing API or system behavior. Make sure to note any non-backward compatible changes as a breaking change.
 

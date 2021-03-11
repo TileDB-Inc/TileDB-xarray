@@ -29,17 +29,17 @@ python_files=$(git diff --cached --name-only --diff-filter=AM | grep '\.py$')
 
 if [ ! -z "${python_files}" ]; then
     # run isort
-    run_test "poetry run isort --check --diff ${python_files}" \
+    run_test "isort --check --diff ${python_files}" \
 	     "isort" \
 	     "Try running 'poetry run isort .' and add changes to git."
     # run black
-    run_test "poetry run black --check ${python_files}" \
+    run_test "black --check ${python_files}" \
 	     "black" \
 	     "Try running 'poetry run black .' and add changes to git."
     # run flake8
-    run_test "poetry run flake8 ${python_files}" "flake8" ""
+    run_test "flake8 ${python_files}" "flake8" ""
     # run mypy
-    run_test "poetry run mypy ${python_files}" "mypy" ""
+    run_test "mypy ${python_files}" "mypy" ""
 fi
 
 # Check for whitespace errors
