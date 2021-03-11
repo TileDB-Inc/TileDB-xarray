@@ -26,3 +26,17 @@ dataset = xr.open_dataset(
 * xarray
   * [Documentation](http://xarray.pydata.org/en/stable/)
   * [GitHub](https://github.com/pydata/xarray/)
+
+## Quick Install
+
+TileDB-xarray requires the current xarray development branch. To install TileDB-xarray, clone this repo and run the following command from inside the cloned repo:
+
+```bash
+pip install .
+```
+
+To enable Dask with xarray run with the 'parallel' extras:
+
+```bash
+pip install '.[parallel]'
+```
