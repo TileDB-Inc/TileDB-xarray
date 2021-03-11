@@ -1,6 +1,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+# Build artifacts
+build/*
+dist/*
+
 # Egg
 *.egg-info
 
