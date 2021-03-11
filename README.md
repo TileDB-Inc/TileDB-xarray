@@ -2,7 +2,7 @@
 
 # TileDB-xarray
 
-This library provides a TileDB backend engine for xarray `open_dataset` function.
+This library provides a backend engine to xarray using the [TileDB Storage Engine](https://github.com/TileDB-Inc/TileDB).
 
 Example usage:
 
